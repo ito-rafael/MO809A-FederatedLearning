@@ -1,0 +1,34 @@
+# create a dir in /home/user/Desktop/Link to contiki:
+cd /home/user/Desktop/Link\ to\ contiki/examples
+mkdir -p Unicamp
+mkdir -p Unicamp/exercise_1
+
+# files:
+#   - Makefile
+#       - mandatory --> user for compilation
+#   - project-conf.h
+#       - override the default Contiki OS configuration
+
+# Cooja:
+# run:
+cd /home/user/contiki/tools/cooja
+ant run
+# create simulation:
+File --> New simulation
+    Radio medium: No radio traffic
+    Mote startup delay (ms): 1,000
+    New random seed on reload: check
+    Create
+# select device:
+Motes --> Add motes --> Create new mote type --> Z1 mote... / Sky mote...
+    Description: 
+    Contiki process / Firmware: exercise_1.c (this is kind of the class)
+    Create
+# Add motes: (here we instantiate the class)
+    Number of new motes: 5
+# right click onnnn the motes --> Show LEDs on Sky 4
+
+# save simulation:
+File --> Save simulation as... --> whatever.csc
+# load simulation:
+File --> Open simulation --> whatever.csc
