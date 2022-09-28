@@ -1,0 +1,8 @@
+Motes:
+  - if sender is Z1 mote, then the receiver is also a Z1 mote
+  - if sender is Sky mote, then the receiver is also a  Sky mote
+
+Deploy sender first (ID=1), and then deploy the receiver (ID=2).
+
+Temperature acquisition only working for Sky mote (Z1 returns always 0).
+
