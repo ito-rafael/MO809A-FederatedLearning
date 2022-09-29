@@ -1,7 +1,6 @@
 /*
  * ===================
  * unicast-receiver.c
- *   --> Z1 mote
  * ===================
  *  class 2: 
  *    code: unicast-receiver.c
@@ -86,8 +85,8 @@ PROCESS_THREAD(proc_unicast_receiver, ev, data) {
     //--------------------
     // set the sender/receiver addresses to a unicast link-local address
     // by convention: 
-    //   - if sender == Z1 mote --> receiver == Z1 mote
-    //   - if sender == Sky mote --> receiver == Sky mote
+    //   - if sender == Z1 mote --> receiver = Z1 mote
+    //   - if sender == Sky mote --> receiver = Sky mote
     // Z1 mote address: 0xfe80, 0, 0, 0, 0xc30c, 0, 0, 0x000<ID>
     // Sky mote address: 0xfe80, 0, 0, 0, 0x0212, 0x740<ID>, 0x000<ID>, 0x0<ID>0<ID>
     #if CONTIKI_TARGET_Z1  // set sender address as Z1 mote as well with ID=1
