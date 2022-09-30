@@ -1,0 +1,32 @@
+Class #4
+Exercise 7
+
+Walkthrough:
+
+  - step 1:
+    create a Z1 mote and compile the code border-router.c on it so it can behave as border router. This mote MUST be first one to be deployed.
+
+  - step 2:
+    set the serial socket on the border router:
+    Cooja --> Tools --> Serial Socket (SERVER) --> Z1 1 --> Start
+
+  - step 3:
+    deploy the other 3 motes using the exercise_6 code "rpl-unicast-sender.c".
+
+  - step 4:
+    run tunslip6:
+
+  - step 5:
+    open a browser (inside the VM) and connect to the border router:
+    Firefox --> http://[abcd::c30c:0:0:1]
+
+  - step 6:
+    ping the tun0 interface, the border router and the other motes:
+    # tun0
+    Terminal --> ping6 abcd::1
+    # border router
+    Terminal --> ping6 abcd::c30c:0:0:1
+    # other motes
+    Terminal --> ping6 abcd::c30c:0:0:2
+    Terminal --> ping6 abcd::c30c:0:0:3
+    Terminal --> ping6 abcd::c30c:0:0:4
