@@ -1,0 +1,10 @@
+# enable RPL debug messages
+vim ~/contiki/core/net/rpl/rpl-icmp6.c
+-----
+//#define DEBUG DEBUG_NONE
+#define DEBUG DEBUG_PRINT
+-----
+
+Motes:
+  - if DAG ROOT is a Z1 mote, then the other motes are also Z1 motes
+  - if DAG ROOT is a Sky mote, then the other motes are also Sky motes
