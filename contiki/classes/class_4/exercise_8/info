@@ -1,0 +1,38 @@
+Class #4
+Exercise #8
+
+Information:
+  - client:
+    - Java
+    - port: 4321
+    - run on: host
+  
+  - server:
+    - Contiki-OS
+    - port: 1234
+    - run on: Z1 mote (Cooja)
+
+
+Walkthrough:
+
+  - step 1:
+    create a Z1 mote and compile the code "border-router.c" on it so it can behave as border router. This mote MUST be first one to be deployed.
+
+  - step 2:
+    set the serial socket on the border router:
+    Cooja --> Tools --> Serial Socket (SERVER) --> Z1 1 --> Start
+
+  - step 3:
+    deploy the second mote as the UDP server using the exercise_8 code "udp-server.c".
+
+  - step 4:
+    run tunslip6:
+    Terminal --> make connect-router-cooja PREFIX="abcd::1/64"
+
+  - step 5:
+    compile the Java code
+    Terminal --> javac UDPClient.java
+
+  - step 6:
+    run the Java code
+    Terminal --> java UDPClient
