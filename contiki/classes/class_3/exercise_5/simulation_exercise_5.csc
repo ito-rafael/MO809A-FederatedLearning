@@ -7,7 +7,7 @@
   <project EXPORT="discard">[APPS_DIR]/collect-view</project>
   <project EXPORT="discard">[APPS_DIR]/powertracker</project>
   <simulation>
-    <title>exercise_5</title>
+    <title>exercise_6</title>
     <speedlimit>1.0</speedlimit>
     <randomseed>42</randomseed>
     <motedelay_us>1000000</motedelay_us>
@@ -45,8 +45,8 @@
       <breakpoints />
       <interface_config>
         org.contikios.cooja.interfaces.Position
-        <x>65.49406791285838</x>
-        <y>5.873258056514786</y>
+        <x>67.31195501357388</x>
+        <y>84.80649966862495</y>
         <z>0.0</z>
       </interface_config>
       <interface_config>
@@ -63,7 +63,7 @@
   <plugin>
     org.contikios.cooja.plugins.SimControl
     <width>280</width>
-    <z>1</z>
+    <z>0</z>
     <height>160</height>
     <location_x>400</location_x>
     <location_y>0</location_y>
@@ -76,7 +76,7 @@
       <skin>org.contikios.cooja.plugins.skins.GridVisualizerSkin</skin>
       <skin>org.contikios.cooja.plugins.skins.TrafficVisualizerSkin</skin>
       <skin>org.contikios.cooja.plugins.skins.UDGMVisualizerSkin</skin>
-      <viewport>0.9090909090909091 0.0 0.0 0.9090909090909091 134.45993826103782 167.66067449407748</viewport>
+      <viewport>0.9090909090909091 0.0 0.0 0.9090909090909091 132.80731362402375 95.90318211943188</viewport>
     </plugin_config>
     <width>400</width>
     <z>4</z>
@@ -92,8 +92,8 @@
       <coloring />
     </plugin_config>
     <width>1518</width>
-    <z>0</z>
-    <height>416</height>
+    <z>1</z>
+    <height>501</height>
     <location_x>400</location_x>
     <location_y>160</location_y>
   </plugin>

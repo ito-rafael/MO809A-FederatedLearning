@@ -22,28 +22,26 @@
 //----------------------------
 
 //============================
-// IPv6 address
-//============================
-static uip_ipaddr_t ipaddr;
-
-//============================
 // process setup
 //============================
 // declare the process
 PROCESS(get_ip_addr, "Exercise 5: get IP addresses of interface");
 // start process after Contiki boot
 AUTOSTART_PROCESSES(&get_ip_addr);
-// define the process
-PROCESS_THREAD(get_ip_addr, ev, data) {
 
-    PROCESS_BEGIN();
-    //--------------------
-    // configuration
-    //--------------------
+//----------------------------
+// fn: set global IPv6 address
+//----------------------------
+static void set_global_addr(){
+    uip_ipaddr_t ipaddr;
     uip_ip6addr(&ipaddr, 0xabcd, 0, 0, 0, 0, 0, 0, 0);
     uip_ds6_set_addr_iid(&ipaddr, &uip_lladdr);
     uip_ds6_addr_add(&ipaddr, 0, ADDR_AUTOCONF);
-
+}
+//----------------------------
+// fn: get IPv6 addresses
+//----------------------------
+static void print_addr(){
     int i;
     printf("IPv6 addresses:\n");
     //cycles for the max number of addresses that the interface can have
@@ -55,6 +53,15 @@ PROCESS_THREAD(get_ip_addr, ev, data) {
             printf("\n");
         }
     }
+}
+//----------------------------
+// define the process
+PROCESS_THREAD(get_ip_addr, ev, data) {
 
+    PROCESS_BEGIN();
+
+    set_global_addr();
+    print_addr();
+    
     PROCESS_END();
 }
