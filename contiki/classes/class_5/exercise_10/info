@@ -1,0 +1,64 @@
+
+CoAP clients:
+  - Java:
+    - Californium
+  - Python:
+    - aiocoap
+    - CoAPthon/CoAPthon3
+  - Node.js:
+    - node-coap
+  - CLI: 
+    - Ubuntu: coap-client
+    - Node.js: CoAP-CLI
+  - Browser (JavaScript): 
+    - Firefox < 55: Copper
+    - Chromium: Cu4Cr
+
+#-------------------------------------------------
+
+How to downgrade Firefox:
+
+cd ~/Downloads
+wget https://ftp.mozilla.org/pub/firefox/releases/55.0/linux-i686/en-US/firefox-55.0.tar.bz2
+tar xvjf firefox-55.0.tar.bz2
+~/Downloads/firefox/firefox
+
+#-------------------------------------------------
+
+Walkthrough:
+
+  - step 1:
+    create a Z1 mote and compile the code "border-router.c" on it so it can behave as border router. This mote MUST be first one to be deployed.
+
+  - step 2:
+    set the serial socket on the border router:
+    Cooja --> Tools --> Serial Socket (SERVER) --> Z1 1 --> Start
+
+  - step 3:
+    deploy the second mote as the CoAP server using the exercise_10 code "coap-led.c".
+
+  - step 4:
+    run tunslip6:
+    Terminal --> 
+      cd /contiki/examples/ipv6/rpl-border-router/
+      make connect-router-cooja PREFIX="abcd::1/64"
+
+  - step 5:
+    list all server resources
+    Firefox --> coap://[abcd::c30c:0:0:2]:5683/.well-known/core --> GET
+
+  - step 6:
+    turn green LED on
+    Firefox --> coap://[abcd::c30c:0:0:2]:5683/color=g?mode=on --> GET
+
+  - step 6.2:
+    if a message "BlockOutOfScope" appears after trying to get the temperature, do the following:
+    - click on the button "Reset"
+    - enable "Debug Control"
+
+  - step 7:
+    change the field "Accept" to receive data in different formats:
+    Firefox --> coap://[abcd::c30c:0:0:2]:5683/temp -->
+      - text/plain: "Temperature: 0"
+      - text/xml: "Bad content type: Support for plain text or json"
+      - application/json: "{"temperature": 0}" 
