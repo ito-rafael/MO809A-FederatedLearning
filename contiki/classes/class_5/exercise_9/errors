@@ -1,0 +1,11 @@
+#--------------
+problem #1:
+#--------------
+  when trying to GET a resourcewith "accept" different of "plain/text" or "application/json", a wrong message is being sent:
+    - expected: "Bad content type: support for plain text or json only"
+    - get: "Bad content type: support for plain text or json onlymeasured by"
+
+#--------------
+problem #2: 
+#--------------
+  when using "plain/text", the GET method is return a temperature equals to 0 (which is fine, due to Cooja simulation), even when a different value of temperature is hard-coded (which is not fine, for obvious reasons).
