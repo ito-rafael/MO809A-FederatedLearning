@@ -1,9 +1,12 @@
-# description: base packages + conda env + MiLeNAS framework
+# description: MO809A project: FL + NAS comparison
+#   - centralized: DenseNet
+#   - centralized_nas: MiLeNAS
+#   - federated: FedAvg (on DenseNet)
+#   - federated_nas: FedNAS (FL on MiLeNAS)
 # author: Rafael Ito
 # version:
 #   - v0.1: first release
-#   - v0.2: copied CIFAR-10 dataset
-#   - v0.3: pin upstream version + update vars
+#   - v0.2: clone FedNAS git repo
 
 #FROM conda/miniconda3
 FROM itorafael/conda-dev:v0.2
@@ -27,11 +30,29 @@ SHELL ["conda", "run", "-n", "milenas", "/bin/bash", "-c"]
 RUN conda install -n $CONDA_ENV pytorch torchvision torchaudio cudatoolkit=10.2 -c pytorch
 RUN echo 'conda activate '$CONDA_ENV >> ~/.bashrc
 
+# copy CIFAR-10 data
+COPY common/data/cifar-10-batches-py data/cifar-10-batches-py
+
 # additional packages
 RUN pip install -r requirements.txt
+RUN pip install \
+    flwr
 
-# copy CIFAR-10 data
-COPY data/cifar-10-batches-py data/cifar-10-batches-py
+#COPY ./federated_nas/server.py .
+#COPY ./federated_nas/client.py .
+#COPY ./federated_nas/run.sh .
+#COPY ./centralized .
+#COPY ./centralized_nas .
+#COPY ./federated .
+#COPY ./federated_nas .
+
+
+WORKDIR /mo809
+ARG GIT_USER="chaoyanghe"
+ARG GIT_REPO="FedNAS"
+RUN git clone "https://github.com/$GIT_USER/$GIT_REPO.git"
+
+RUN apt install -y procps
 
 # prevent container from dying
 ENTRYPOINT ["tail", "-f", "/dev/null"]
