@@ -16,15 +16,35 @@ def weighted_average(metrics: List[Tuple[int, Metrics]]) -> Metrics:
     return {"accuracy": sum(accuracies) / sum(examples)}
 
 #---------------------------------------
+# Additional config
+#---------------------------------------
+def fit_config(server_round: int):
+    """Return training configuration dict for each round."""
+    config = {
+        #"batch_size": 32,
+        "current_round": server_round,
+        "local_epochs": 1,
+    }
+    return config
+
+#---------------------------------------
 # Define strategy
 #---------------------------------------
 strategy = fl.server.strategy.FedAvg(
     #evaluate_metrics_aggregation_fn=weighted_average,
-    fraction_evaluate=0.01,
-    min_evaluate_clients = 1,
-    fraction_fit=0.1,
-    min_available_clients=2,
-    min_fit_clients=2
+    #fraction_evaluate=0.01,	# Fraction of clients used during validation
+    #min_evaluate_clients = 1,	# Minimum number of clients used during validation
+    #fraction_fit=0.1,		# Sample 10% of available clients for the next round
+    #min_available_clients=2,	
+    #min_fit_clients=2,		# Minimum number of clients to be sampled for the next round
+
+    min_available_clients=3,
+    min_fit_clients=3,
+    #fraction_fit=0.5,		# Sample 10% of available clients for the next round
+    #min_available_clients=4,
+    #min_fit_clients=4,
+    on_fit_config_fn=fit_config,
+
 )
 
 #---------------------------------------
@@ -32,7 +52,6 @@ strategy = fl.server.strategy.FedAvg(
 #---------------------------------------
 fl.server.start_server(
     server_address="0.0.0.0:8080",
-    config=fl.server.ServerConfig(num_rounds=3),
-    #config=fl.server.ServerConfig(num_rounds=50),
+    config=fl.server.ServerConfig(num_rounds=100),
     strategy=strategy,
 )
